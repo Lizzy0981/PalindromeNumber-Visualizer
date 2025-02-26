@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Number Visualizer | Elizabeth Diaz Familia</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Añadir fuente Montserrat de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/null/palindrome.png">
+    <!-- Meta tags para SEO y compartir en redes sociales -->
+    <meta name="description" content="Visualizador interactivo para el algoritmo Palindrome Number con enfoque matemático">
+    <meta name="keywords" content="palindrome number, algoritmo, visualizador, javascript, matemáticas">
+    <meta name="author" content="Elizabeth Diaz Familia">
+    <meta property="og:title" content="Palindrome Number Visualizer">
+    <meta property="og:description" content="Visualizador interactivo para el algoritmo Palindrome Number con enfoque matemático">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <div class="leaf-container">
+        <div class="leaf leaf1"></div>
+        <div class="leaf leaf2"></div>
+        <div class="leaf leaf3"></div>
+        <div class="leaf leaf4"></div>
+        <div class="leaf leaf5"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-shape">
+                    <span class="logo-text">1</span>
+                    <span class="logo-text">2</span>
+                    <span class="logo-text">1</span>
+                </div>
+                <h1>Palindrome Number</h1>
+            </div>
+            <p class="tagline">Visualizador matemático para determinar si un número es palíndromo</p>
+        </header>
+        
+        <main>
+            <section class="card input-section">
+                <div class="card-header">
+                    <div class="card-icon">🔢</div>
+                    <h2>Ingresa un número</h2>
+                </div>
+                
+                <div class="card-body">
+                    <form id="input-form">
+                        <div class="input-group">
+                            <label for="number-input">Número entero:</label>
+                            <input type="number" id="number-input" placeholder="Ej: 121" value="121">
+                            <small class="hint">Rango: -2<sup>31</sup> a 2<sup>31</sup>-1</small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-icon">🔍</span>
+                            <span>Verificar palíndromo</span>
+                        </button>
+                    </form>
+                    
+                    <div class="examples">
+                        <div class="examples-title">Ejemplos:</div>
+                        <div class="pills">
+                            <button class="pill" data-number="121">121</button>
+                            <button class="pill" data-number="-121">-121</button>
+                            <button class="pill" data-number="10">10</button>
+                            <button class="pill" data-number="1234321">1234321</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="card result-section">
+                <div class="card-header">
+                    <div class="card-icon">✨</div>
+                    <h2>Resultado</h2>
+                </div>
+                
+                <div class="card-body">
+                    <div class="result-display" id="result-display">
+                        <div class="result-message" id="result-message">
+                            Ingresa un número y presiona "Verificar palíndromo"
+                        </div>
+                        
+                        <div class="result-animation" id="result-animation">
+                            <div class="number-container original">
+                                <div class="number-label">Número Original</div>
+                                <div class="number-value" id="original-number"></div>
+                            </div>
+                            
+                            <div class="process-container">
+                                <div class="arrow-container">
+                                    <div class="arrow arrow-left"></div>
+                                    <div class="arrow arrow-right"></div>
+                                </div>
+                                <div class="process-steps" id="process-steps"></div>
+                            </div>
+                            
+                            <div class="number-container reversed">
+                                <div class="number-label">Mitad Invertida</div>
+                                <div class="number-value" id="reversed-number">0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-container" id="comparison-container">
+                            <div class="comparison-title">Comparación Final</div>
+                            <div class="comparison-details" id="comparison-details"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls" id="animation-controls">
+                        <button class="btn btn-secondary" id="reset-btn">
+                            <span class="btn-icon">🔄</span>
+                            <span>Reiniciar</span>
+                        </button>
+                        <button class="btn btn-secondary" id="prev-btn" disabled>
+                            <span class="btn-icon">⬅️</span>
+                            <span>Anterior</span>
+                        </button>
+                        <button class="btn btn-accent" id="next-btn" disabled>
+                            <span class="btn-icon">➡️</span>
+                            <span>Siguiente</span>
+                        </button>
+                        <button class="btn btn-secondary" id="auto-btn" disabled>
+                            <span class="btn-icon">▶️</span>
+                            <span>Auto</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="card explanation-section">
+                <div class="card-header">
+                    <div class="card-icon">💡</div>
+                    <h2>Cómo funciona</h2>
+                </div>
+                
+                <div class="card-body">
+                    <div class="explanation">
+                        <p>Un <strong>palíndromo</strong> es un número que se lee igual de izquierda a derecha y de derecha a izquierda. Por ejemplo, 121 y 12321 son palíndromos.</p>
+                        
+                        <div class="algorithm-overview">
+                            <h3>Enfoque Matemático</h3>
+                            <p>Para determinar si un número es palíndromo <em>sin convertirlo a texto</em>, seguimos estos pasos:</p>
+                            
+                            <ol class="steps-list">
+                                <li>Primero descartamos casos especiales:
+                                    <ul>
+                                        <li>Números negativos no son palíndromos (por el signo)</li>
+                                        <li>Números que terminan en 0 (excepto el 0 mismo) no son palíndromos</li>
+                                    </ul>
+                                </li>
+                                <li>Invertimos la <strong>mitad</strong> del número mediante operaciones matemáticas</li>
+                                <li>Extraemos dígitos del número original con la operación módulo (<code>%</code>)</li>
+                                <li>Construimos el número invertido multiplicando por 10 y sumando</li>
+                                <li>Al final, comparamos:
+                                    <ul>
+                                        <li>Para números con cantidad par de dígitos: x == reversed_half</li>
+                                        <li>Para números con cantidad impar de dígitos: x == reversed_half // 10</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                        
+                        <div class="complexity">
+                            <div class="complexity-item">
+                                <div class="complexity-title">Complejidad Temporal</div>
+                                <div class="complexity-value">O(log n)</div>
+                                <div class="complexity-explanation">Procesamos la mitad de los dígitos del número</div>
+                            </div>
+                            <div class="complexity-item">
+                                <div class="complexity-title">Complejidad Espacial</div>
+                                <div class="complexity-value">O(1)</div>
+                                <div class="complexity-explanation">Usamos un número constante de variables</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip">
+                            <div class="tip-icon">🌱</div>
+                            <div class="tip-content">
+                                <strong>Observación:</strong> Este enfoque es más eficiente que convertir a string porque:
+                                <ol>
+                                    <li>Solo procesamos la mitad de los dígitos</li>
+                                    <li>No necesitamos espacio adicional para almacenar la conversión</li>
+                                    <li>Utilizamos operaciones matemáticas nativas que son muy eficientes</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div class="author">
+                <h3>Elizabeth Diaz Familia</h3>
+                <div class="social-links">
+                    <a href="https://github.com/Lizzy0981" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/eli-familia" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="https://twitter.com/Lizzyfamilia" target="_blank" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <p class="credits">© <span id="current-year">2025</span> | Hecho con 💚</p>
+            <p class="acknowledgments">Con agradecimiento a Oracle Next Education y Alura Latam</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
