@@ -7,7 +7,7 @@ Un visualizador interactivo y orgánico que muestra cómo determinar si un núme
 ![Palindrome Number Visualizer - Interfaz Principal]![Captura de pantalla_26-2-2025_171444_](https://github.com/user-attachments/assets/e04f3db8-af37-49d4-9df8-d1eccfe21a19)
 
 
-*Nota: Esta es una imagen de marcador de posición. Una vez que la aplicación esté desplegada, reemplaza esta imagen con una captura de pantalla real de tu aplicación.*
+*Imagen de captura de pantalla real de la aplicación desplagada.*
 
 ## ✨ Características
 
